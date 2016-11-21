@@ -1,0 +1,27 @@
+\frametitle{A relatable example --- the code}
+\begin{lstlisting}
+	import numpy as np
+	import matplotlib.pyplot as plt
+	from scipy.io import wavfile
+
+	location = "/home/daniel/Documents/lab/vowgenface/vowels/unswapped/kabrii01.wav"
+
+	[fs, vowel] = wavfile.read(location)
+	n = len(vowel)
+	time_axis = np.arange(n)/fs
+	vowel = vowel/np.max(np.abs(vowel))
+
+	plt.plot(time_axis, vowel)
+	plt.ylabel("Amplitude")
+	plt.xlabel("Time")
+	plt.show()
+
+	log_spectrum = 20*np.log10(np.fft.rfft(vowel))
+	dt = n/fs
+	freq_axis = (np.arange(n)/dt)[0:len(log_spectrum)]
+
+	plt.plot(freq_axis, log_spectrum)
+	plt.ylabel("Amplitude")
+	plt.xlabel("Frequency")
+	plt.show()
+\end{lstlisting}

@@ -1,0 +1,6 @@
+\beamer@endinputifotherversion {3.36pt}
+\beamer@sectionintoc {1}{KnitR}{2}{0}{1}
+\beamer@sectionintoc {2}{Intro}{7}{0}{2}
+\beamer@sectionintoc {3}{Scripts}{8}{0}{3}
+\beamer@sectionintoc {4}{Loops}{9}{0}{4}
+\beamer@sectionintoc {5}{Making a spectrogram}{13}{0}{5}

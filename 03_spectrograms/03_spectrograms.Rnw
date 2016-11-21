@@ -1,0 +1,206 @@
+\documentclass{beamer}
+
+\title{Python Intro --- Part 3}
+\author{Daniel Guest}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\section{KnitR}
+
+\begin{frame}[fragile]
+\frametitle{First, a small aside...}
+\begin{itemize}
+	\item This entire presentation is a KnitR demonstration, as well as a presentation on Python
+
+	\item Check out the .Rnw file to see the mixture of \LaTeX{} code and R code that is Sweaved together by KnitR to generate the output
+	
+	\item I'm using the \LaTeX{} beamer package to create this slideshow
+
+	\item KnitR makes for very elegant presentations of R code and easy inclusion of graphics
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{First, a small aside...}
+<<include=FALSE, echo=FALSE>>=
+library(ggplot2)
+library(dplyr)
+@
+
+<<>>=
+d <- select(iris, Sepal.Width, Petal.Length, Petal.Width)
+head(d)
+@
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{First, a small aside...}
+
+<<fig.width=4, fig.height=2>>=
+ggplot(d,aes(x=Sepal.Width, y=Petal.Length, color=Petal.Width)) + geom_point()
+@
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{First, a small aside...}
+
+\begin{itemize}
+	\item Of course, the question arises --- Why is KnitR and \LaTeX{} in this presentation?
+
+	\item KnitR is also ready to handle other languages
+
+	\item If you ever need to present code in Python, C, R, Scala, Perl, Fortran, etc...
+
+	\item For example...
+
+<<engine="python", engine.path="python3">>=
+x = [1,2,3,4,5]
+x.append(4)
+print(2+2)
+print(x)
+@
+\end{itemize}
+\end{frame}
+
+\section{Intro}
+
+\begin{frame}
+\frametitle{Plan}
+\begin{itemize}
+	\item We're going to focus on two things today
+
+	\begin{enumerate}
+		\item Theoretical --- control statements and loops
+
+		\item Practical --- applying numpy and scipy to analyze sound 
+	\end{enumerate}
+
+	\item What we'll need
+	\begin{enumerate}
+		\item Python 3 (through IPython)
+
+		\item numpy, scipy, matplotlib, sounddevice
+
+		\item Sound files (in folder "samples") 
+	\end{enumerate}
+
+	\item Overview
+	\begin{enumerate}
+		\item Set up scripting tools
+
+		\item A brief intro to loops
+
+		\item Make one spectrogram
+
+		\item Make a bunch of spectrograms
+	\end{enumerate}
+\end{itemize}
+\end{frame}
+
+\section{Scripts}
+
+\begin{frame}
+\frametitle{Bare bones scripting}
+\begin{itemize}
+	\item Today, we'll set up a bare bones environment for scripts
+
+	\item You'll soon probably want something more fully fledged...
+	\begin{enumerate}
+		\item Spyder
+
+		\item Eclipse
+	\end{enumerate}
+
+	\item Now, let's open up Notepad++
+\end{itemize}
+\end{frame}
+
+\section{Loops}
+
+\begin{frame}[fragile]
+\frametitle{Our first loop}
+\begin{itemize}
+	\item Loops in Python have a very easy and powerful syntax
+
+\end{itemize}
+<<engine="python", engine.path="python3">>=
+for i in range(5):
+	print(i)
+@
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Loop syntax}
+\begin{itemize}
+	\item Unlike MATLAB and R which employ brackets, Python uses tabs to indicate nesting
+
+	\item If we don't nest at least one line for a loop we'll have problems
+
+	\item I personally like this, I think it promotes more readable code!
+
+\end{itemize}
+<<engine="python", engine.path="python3">>=
+for i in range(5):
+print(i)
+@
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Looping over other things}
+\begin{itemize}
+	\item We can loop over a variety of objects
+
+	\item The range() function is for when we want integer sequences, but many things in Python can be used to create a loop (technically, these things are called iterables in Python-lingo)
+
+	\item Lists are iterables...
+
+\end{itemize}
+<<engine="python", engine.path="python3">>=
+x = [1,4,9,16,25]
+for i in x:
+	print(str(i) + str(x))
+@
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Looping over other things}
+\begin{itemize}
+	\item Strings are also iterables... 
+
+\end{itemize}
+<<engine="python", engine.path="python3">>=
+for i in "Hello":
+	print(i)
+@
+\end{frame}
+
+\section{Making a spectrogram}
+\begin{frame}[fragile]
+\frametitle{Setting up the environment}
+\begin{itemize}
+	\item First, we need to import the necessary modules
+<<engine="python", engine.path="python3">>=
+import numpy
+from scipy.io import wavfile
+import matplotlib.pyplot as plt
+@
+\end{itemize}
+
+\begin{itemize}
+	\item Numpy --- provides key matrix and DSP operations
+
+	\item wavfile --- provides read/write to wavfile
+	
+	\item pyplot --- user-friendly functions and objects for plotting
+\end{itemize}
+\end{frame}
+
+\end{document}
