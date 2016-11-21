@@ -1,6 +1,7 @@
 \documentclass{beamer}
 
-\title{Python Intro --- Part 3}
+\title{Python Intro --- Part 2}
+\subtitle{Spectrograms}
 \author{Daniel Guest}
 
 \begin{document}
