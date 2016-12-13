@@ -50,7 +50,7 @@ ggplot(d,aes(x=Sepal.Width, y=Petal.Length, color=Petal.Width)) + geom_point()
 \frametitle{First, a small aside...}
 
 \begin{itemize}
-	\item Of course, the question arises --- Why is KnitR and \LaTeX{} in this presentation?
+		\item Of course, the question arises --- Why is KnitR and \LaTeX{} in \emph{this} presentation?
 
 	\item KnitR is also ready to handle other languages
 
@@ -140,7 +140,7 @@ for i in range(5):
 \begin{itemize}
 	\item Unlike MATLAB and R which employ brackets, Python uses tabs to indicate nesting
 
-	\item If we don't nest at least one line for a loop we'll have problems
+	\item If we don't indent at least one line for a loop we'll have problems
 
 	\item I personally like this, I think it promotes more readable code!
 
@@ -183,6 +183,21 @@ for i in "Hello":
 @
 \end{frame}
 
+\begin{frame}[fragile]
+\frametitle{Nested loops}
+\begin{itemize}
+	\item Just like in other languages, we can nest for loops to do more powerful things
+\end{itemize}
+<<engine="python", engine.path="python3", size="tiny">>=
+bases = [1, 2, 3]
+for base in bases:
+	for expo in range(3):
+		print(str(base) + "^" + str(expo) + "=" + str(base**expo))
+@
+\end{frame}
+
+
+
 \section{Making a spectrogram}
 \begin{frame}[fragile]
 \frametitle{Setting up the environment}
@@ -204,4 +219,12 @@ import matplotlib.pyplot as plt
 \end{itemize}
 \end{frame}
 
+\begin{frame}[fragile]
+\frametitle{Importing some files}
+<<engine="python", engine.path="python3">>=
+2+2
+@
+\end{frame}
+
 \end{document}
+

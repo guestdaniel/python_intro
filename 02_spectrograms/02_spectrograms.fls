@@ -321,6 +321,7 @@ INPUT ./figure/unnamed-chunk-3-1.pdf
 OUTPUT 02_spectrograms.vrb
 INPUT 02_spectrograms.vrb
 INPUT 02_spectrograms.vrb
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmssi10.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmss10.tfm
 OUTPUT 02_spectrograms.vrb
 INPUT 02_spectrograms.vrb
@@ -337,6 +338,10 @@ INPUT 02_spectrograms.vrb
 OUTPUT 02_spectrograms.vrb
 INPUT 02_spectrograms.vrb
 INPUT 02_spectrograms.vrb
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmtt8.tfm
+OUTPUT 02_spectrograms.vrb
+INPUT 02_spectrograms.vrb
+INPUT 02_spectrograms.vrb
 OUTPUT 02_spectrograms.nav
 OUTPUT 02_spectrograms.toc
 OUTPUT 02_spectrograms.snm
@@ -346,5 +351,7 @@ INPUT ./02_spectrograms.out
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb
+INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi10.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb
+INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb

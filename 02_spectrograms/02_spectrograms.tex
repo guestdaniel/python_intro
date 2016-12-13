@@ -117,7 +117,7 @@
 \frametitle{First, a small aside...}
 
 \begin{itemize}
-	\item Of course, the question arises --- Why is KnitR and \LaTeX{} in this presentation?
+		\item Of course, the question arises --- Why is KnitR and \LaTeX{} in \emph{this} presentation?
 
 	\item KnitR is also ready to handle other languages
 
@@ -232,7 +232,7 @@
 \begin{itemize}
 	\item Unlike MATLAB and R which employ brackets, Python uses tabs to indicate nesting
 
-	\item If we don't nest at least one line for a loop we'll have problems
+	\item If we don't indent at least one line for a loop we'll have problems
 
 	\item I personally like this, I think it promotes more readable code!
 
@@ -315,6 +315,39 @@
 \end{kframe}
 \end{knitrout}
 \end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Nested loops}
+\begin{itemize}
+	\item Just like in other languages, we can nest for loops to do more powerful things
+\end{itemize}
+\begin{knitrout}\tiny
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\noindent
+\ttfamily
+\hlstd{bases\ }\hlopt{=\ {[}}\hlstd{}\hlnum{1}\hlstd{}\hlopt{,\ }\hlstd{}\hlnum{2}\hlstd{}\hlopt{,\ }\hlstd{}\hlnum{3}\hlstd{}\hlopt{{]}}\hspace*{\fill}\\
+\hlstd{}\hlkwa{for\ }\hlstd{base\ }\hlkwa{in\ }\hlstd{bases}\hlopt{:}\hspace*{\fill}\\
+\hlstd{\ }\hlkwa{for\ }\hlstd{expo\ }\hlkwa{in\ }\hlstd{}\hlkwb{range}\hlstd{}\hlopt{(}\hlstd{}\hlnum{3}\hlstd{}\hlopt{):}\hspace*{\fill}\\
+\hlstd{}\hlstd{\ \ }\hlstd{}\hlkwa{print}\hlstd{}\hlopt{(}\hlstd{}\hlkwb{str}\hlstd{}\hlopt{(}\hlstd{base}\hlopt{)\ +\ }\hlstd{}\hlstr{"\textasciicircum "}\hlstd{\ }\hlopt{+\ }\hlstd{}\hlkwb{str}\hlstd{}\hlopt{(}\hlstd{expo}\hlopt{)\ +\ }\hlstd{}\hlstr{"="}\hlstd{\ }\hlopt{+\ }\hlstd{}\hlkwb{str}\hlstd{}\hlopt{(}\hlstd{base}\hlopt{{*}{*}}\hlstd{expo}\hlopt{))}\hlstd{}\hspace*{\fill}
+\mbox{}
+\normalfont
+
+\begin{verbatim}
+## 1^0=1
+## 1^1=1
+## 1^2=1
+## 2^0=1
+## 2^1=2
+## 2^2=4
+## 3^0=1
+## 3^1=3
+## 3^2=9
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\end{frame}
+
+
 
 \section{Making a spectrogram}
 \begin{frame}[fragile]
