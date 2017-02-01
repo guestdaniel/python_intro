@@ -1,8 +1,18 @@
 \documentclass{beamer}
+\usepackage{hyperref}
 
 \title{Python Intro --- Part 2}
 \subtitle{Loops, Spectrograms}
 \author{Daniel Guest}
+
+\AtBeginSection[]{
+	\begin{frame}
+	\vfill
+	\centering
+	\usebeamerfont{title}\insertsectionhead\par%
+	\vfill
+	\end{frame}
+}
 
 \begin{document}
 
@@ -17,11 +27,19 @@
 \begin{itemize}
 	\item This entire presentation is a KnitR demonstration, as well as a presentation on Python
 
-	\item Check out the .Rnw file to see the mixture of \LaTeX{} code and R code that is combined by KnitR to generate the output
+	\item Check out the .Rnw file at \url{https://github.com/guestdaniel/python\_intro/tree/master/02\_spectrograms}
+
+	\item KnitR mixes R and \LaTeX{} to generate high quality publications and presentations
+
+		\begin{itemize}
+			\item This makes it super easy to include graphics
+
+			\item KnitR also has nice options for syntax highlighting for many programming languages 
+
+		\end{itemize}
 	
 	\item I'm using the \LaTeX{} beamer package to create this slideshow
 
-	\item KnitR makes for very elegant presentations of R code and easy inclusion of graphics
 \end{itemize}
 \end{frame}
 
@@ -32,39 +50,20 @@ library(ggplot2)
 library(dplyr)
 @
 
-<<>>=
-d <- select(iris, Sepal.Width, Petal.Length, Petal.Width)
-head(d)
+A nice demonstration of KnitR!
+
+<<size="tiny">>=
+head(select(iris, Sepal.Width, Petal.Length, Petal.Width, Species))
+head(iris %>% group_by(Species) %>% summarize(wid.mean = mean(Sepal.Width), wid.sd = sd(Sepal.Width)))
 @
 \end{frame}
 
 \begin{frame}[fragile]
 \frametitle{First, a small aside...}
 
-<<fig.width=4, fig.height=2>>=
-ggplot(d,aes(x=Sepal.Width, y=Petal.Length, color=Petal.Width)) + geom_point()
+<<fig.width=8, fig.height=4, size="tiny">>=
+ggplot(iris, aes(x=Sepal.Width, y=Petal.Length, color=Petal.Width, shape=Species)) + geom_point()
 @
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{First, a small aside...}
-
-\begin{itemize}
-		\item Of course, the question arises --- Why is KnitR and \LaTeX{} in \emph{this} presentation?
-
-	\item KnitR is also ready to handle other languages
-
-	\item If you ever need to present code in Python, C, R, Scala, Perl, Fortran, etc...
-
-	\item For example...
-
-<<engine="python", engine.path="python3">>=
-x = [1,2,3,4,5]
-x.append(4)
-print(2+2)
-print(x)
-@
-\end{itemize}
 \end{frame}
 
 \section{Intro}
@@ -72,7 +71,7 @@ print(x)
 \begin{frame}
 \frametitle{Plan}
 \begin{itemize}
-	\item We're going to focus on two things today
+	\item We're going to focus on two things 
 
 	\begin{enumerate}
 		\item Theoretical --- control statements and loops
@@ -91,7 +90,9 @@ print(x)
 
 	\item Overview
 	\begin{enumerate}
-		\item Set up scripting tools
+		\item Get the packages we need
+
+		\item Set up editor 
 
 		\item A brief intro to loops
 
@@ -102,21 +103,69 @@ print(x)
 \end{itemize}
 \end{frame}
 
+\section{Packages}
+
+\begin{frame}[fragile]
+\frametitle{Installing sounddevice}
+	\begin{itemize}
+		\item Why we need each of the following packages is explained later!
+
+		\item We should already have numpy, scipy, and matplotlib installed through Conda
+
+		\item However, we do need to install sounddevice, which will allow us to play sound from a numpy array
+
+		\item To do this using Conda, we type in a generic terminal window... 
+
+		conda list
+
+		\item We notice sounddevice is not on our list, so...
+
+		conda search sounddevice
+		
+		conda install sounddevice
+
+	\end{itemize}
+\end{frame}
+
 \section{Scripts}
 
 \begin{frame}
-\frametitle{Bare bones scripting}
+\frametitle{Editors}
 \begin{itemize}
-	\item Today, we'll set up a bare bones environment for scripts
-
-	\item You'll soon probably want something more fully fledged...
+	\item Today, we'll just be writing scripts in Notepad, saving them to disk, and then running them through the IPython terminal 
+	\item You'll soon probably want something more fully fledged, more like MATLAB or RStudio
 	\begin{enumerate}
 		\item Spyder
 
 		\item Eclipse
+
+		\item SublimeText
+
+		\item PyCharm
 	\end{enumerate}
 
-	\item Now, let's open up Notepad++
+	\item Now, let's open up Notepad... 
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Writing and running a script}
+\begin{itemize}
+	\item First we write a series of commands in Notepad
+
+	\item Note that Python is sensitive to indentation --- where MATLAB uses "end" and R brackets, Python uses indentation to indicate nested statements and such
+
+	\item Starting with something simple...
+
+<<engine="python", engine.path="python3", results="hide">>=
+print(2+2)
+@
+
+	\item Save this using Notepad to a file called "test.py"
+
+	\item Then, in your terminal, say...
+	
+	python3 C:/your\_directory\_here/test.py
 \end{itemize}
 \end{frame}
 
@@ -138,7 +187,7 @@ for i in range(5):
 \begin{frame}[fragile]
 \frametitle{Loop syntax}
 \begin{itemize}
-	\item Unlike MATLAB and R which employ brackets, Python uses tabs to indicate nesting
+	\item As previously mentioned, Python uses indentation to indicate nesting
 
 	\item If we don't indent at least one line for a loop we'll have problems
 
@@ -152,7 +201,6 @@ print(i)
 
 \end{frame}
 
-
 \begin{frame}[fragile]
 \frametitle{Looping over other things}
 \begin{itemize}
@@ -161,6 +209,8 @@ print(i)
 	\item The range() function is for when we want integer sequences, but many things in Python can be used to create a loop (technically, these things are called iterables in Python-lingo)
 
 	\item Lists are iterables...
+
+	\item You can also define your own custom objects to be iterables!
 
 \end{itemize}
 <<engine="python", engine.path="python3">>=
@@ -190,13 +240,31 @@ for i in "Hello":
 \end{itemize}
 <<engine="python", engine.path="python3", size="tiny">>=
 bases = [1, 2, 3]
+expos = [1, 2, 3, 4]
 for base in bases:
-	for expo in range(3):
+	print("Base:" + str(base))
+	for expo in expos:
 		print(str(base) + "^" + str(expo) + "=" + str(base**expo))
 @
 \end{frame}
 
+\begin{frame}[fragile]
+\begin{itemize}
+	\item Naturally, we can mix loops and other control statements 
 
+<<engine="python", engine.path="python3", size="tiny">>=
+for i in range(10):
+	if i < 3:
+		print(i)
+	elif i > 3 and i < 6:
+		print(i*100)
+	elif i == 8:
+		break
+	else:
+		print("Hello")
+@
+\end{itemize}
+\end{frame}
 
 \section{Making a spectrogram}
 \begin{frame}[fragile]
@@ -214,11 +282,13 @@ import sounddevice as sd
 \end{itemize}
 
 \begin{itemize}
-	\item Numpy --- provides key matrix and DSP operations
+	\item numpy --- provides key matrix and DSP operations
 
 	\item wavfile --- provides read/write to wavfile
 	
 	\item pyplot --- user-friendly functions and objects for plotting
+
+	\item sounddevice --- playback from numpy arrays
 \end{itemize}
 \end{frame}
 
@@ -226,10 +296,15 @@ import sounddevice as sd
 \frametitle{Game Plan}
 \begin{enumerate}
 		\item Import one signal
+
 		\item Collect measurements of amplitude in each time frequency bin 
+
 		\item Plot it
+
 		\item Save the plot to file
+
 		\item Loop the above four steps as necessary
+
 		\item Put everything in a script
 \end{enumerate}
 \end{frame}
@@ -252,7 +327,7 @@ location = "/home/daniel/Desktop/samples/m03ae.wav"
 
 	\item We can see what this waveform looks like with ...
 
-<<engine="python", engine.path="python3", echo=7>>=
+<<engine="python", engine.path="python3", echo=7:8>>=
 import numpy as np
 from scipy.io import wavfile
 import matplotlib.pyplot as plt
@@ -265,7 +340,7 @@ plt.plot(y)
 
 	\item And what it sounds like with...
 
-<<engine="python", engine.path="python3", echo=7>>=
+<<engine="python", engine.path="python3", echo=7, results="hide">>=
 import numpy as np
 from scipy.io import wavfile
 import matplotlib.pyplot as plt
@@ -275,29 +350,6 @@ location = "/home/daniel/Desktop/samples/m03ae.wav"
 sd.play(y,fs)
 @
 \end{itemize}
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{Gathering amplitude measurements}
-\begin{itemize}
-	\item First, let's look at measuring the amplitude spectra of the entire signal, then we'll investigate how to break it into overlapping chunks to generate the time-frequency bin matrix 
-<<engine="python", engine.path="python3", echo=7:8>>=
-import numpy
-from scipy.io import wav			
-import matplotlib.pyplot as plt
-import sounddevice as sd
-location = "/home/daniel/Desktop/samples/m03ae.wav"
-[fs,y] = wavfile.read(location)
-m = 20*np.log10(np.fft.rfft(y))
-@
-\end{itemize}
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{Importing some files}
-<<engine="python", engine.path="python3">>=
-2+2
-@
 \end{frame}
 
 \end{document}

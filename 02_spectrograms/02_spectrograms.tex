@@ -50,10 +50,20 @@
 
 \let\hlesc\hlstd \let\hlpps\hlstd \let\hllin\hlstd \let\hlslc\hlcom \let\hlppc\hlcom
 \usepackage{alltt}
+\usepackage{hyperref}
 
 \title{Python Intro --- Part 2}
 \subtitle{Loops, Spectrograms}
 \author{Daniel Guest}
+
+\AtBeginSection[]{
+	\begin{frame}
+	\vfill
+	\centering
+	\usebeamerfont{title}\insertsectionhead\par%
+	\vfill
+	\end{frame}
+}
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \begin{document}
 
@@ -68,11 +78,19 @@
 \begin{itemize}
 	\item This entire presentation is a KnitR demonstration, as well as a presentation on Python
 
-	\item Check out the .Rnw file to see the mixture of \LaTeX{} code and R code that is combined by KnitR to generate the output
+	\item Check out the .Rnw file at \url{https://github.com/guestdaniel/python\_intro/tree/master/02\_spectrograms}
+
+	\item KnitR mixes R and \LaTeX{} to generate high quality publications and presentations
+
+		\begin{itemize}
+			\item This makes it super easy to include graphics
+
+			\item KnitR also has nice options for syntax highlighting for many programming languages 
+
+		\end{itemize}
 	
 	\item I'm using the \LaTeX{} beamer package to create this slideshow
 
-	\item KnitR makes for very elegant presentations of R code and easy inclusion of graphics
 \end{itemize}
 \end{frame}
 
@@ -80,20 +98,32 @@
 \frametitle{First, a small aside...}
 
 
-\begin{knitrout}
+A nice demonstration of KnitR!
+
+\begin{knitrout}\tiny
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{d} \hlkwb{<-} \hlkwd{select}\hlstd{(iris, Sepal.Width, Petal.Length, Petal.Width)}
-\hlkwd{head}\hlstd{(d)}
+\hlkwd{head}\hlstd{(}\hlkwd{select}\hlstd{(iris, Sepal.Width, Petal.Length, Petal.Width, Species))}
 \end{alltt}
 \begin{verbatim}
-##   Sepal.Width Petal.Length Petal.Width
-## 1         3.5          1.4         0.2
-## 2         3.0          1.4         0.2
-## 3         3.2          1.3         0.2
-## 4         3.1          1.5         0.2
-## 5         3.6          1.4         0.2
-## 6         3.9          1.7         0.4
+##   Sepal.Width Petal.Length Petal.Width Species
+## 1         3.5          1.4         0.2  setosa
+## 2         3.0          1.4         0.2  setosa
+## 3         3.2          1.3         0.2  setosa
+## 4         3.1          1.5         0.2  setosa
+## 5         3.6          1.4         0.2  setosa
+## 6         3.9          1.7         0.4  setosa
+\end{verbatim}
+\begin{alltt}
+\hlkwd{head}\hlstd{(iris} \hlopt{%>%} \hlkwd{group_by}\hlstd{(Species)} \hlopt{%>%} \hlkwd{summarize}\hlstd{(}\hlkwc{wid.mean} \hlstd{=} \hlkwd{mean}\hlstd{(Sepal.Width),} \hlkwc{wid.sd} \hlstd{=} \hlkwd{sd}\hlstd{(Sepal.Width)))}
+\end{alltt}
+\begin{verbatim}
+## # A tibble: 3 × 3
+##      Species wid.mean    wid.sd
+##       <fctr>    <dbl>     <dbl>
+## 1     setosa    3.428 0.3790644
+## 2 versicolor    2.770 0.3137983
+## 3  virginica    2.974 0.3224966
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -102,10 +132,10 @@
 \begin{frame}[fragile]
 \frametitle{First, a small aside...}
 
-\begin{knitrout}
+\begin{knitrout}\tiny
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlkwd{ggplot}\hlstd{(d,}\hlkwd{aes}\hlstd{(}\hlkwc{x}\hlstd{=Sepal.Width,} \hlkwc{y}\hlstd{=Petal.Length,} \hlkwc{color}\hlstd{=Petal.Width))} \hlopt{+} \hlkwd{geom_point}\hlstd{()}
+\hlkwd{ggplot}\hlstd{(iris,} \hlkwd{aes}\hlstd{(}\hlkwc{x}\hlstd{=Sepal.Width,} \hlkwc{y}\hlstd{=Petal.Length,} \hlkwc{color}\hlstd{=Petal.Width,} \hlkwc{shape}\hlstd{=Species))} \hlopt{+} \hlkwd{geom_point}\hlstd{()}
 \end{alltt}
 \end{kframe}
 \includegraphics[width=\maxwidth]{figure/unnamed-chunk-3-1} 
@@ -113,44 +143,12 @@
 \end{knitrout}
 \end{frame}
 
-\begin{frame}[fragile]
-\frametitle{First, a small aside...}
-
-\begin{itemize}
-		\item Of course, the question arises --- Why is KnitR and \LaTeX{} in \emph{this} presentation?
-
-	\item KnitR is also ready to handle other languages
-
-	\item If you ever need to present code in Python, C, R, Scala, Perl, Fortran, etc...
-
-	\item For example...
-
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\noindent
-\ttfamily
-\hlstd{x\ }\hlopt{=\ {[}}\hlstd{}\hlnum{1}\hlstd{}\hlopt{,}\hlstd{}\hlnum{2}\hlstd{}\hlopt{,}\hlstd{}\hlnum{3}\hlstd{}\hlopt{,}\hlstd{}\hlnum{4}\hlstd{}\hlopt{,}\hlstd{}\hlnum{5}\hlstd{}\hlopt{{]}}\hspace*{\fill}\\
-\hlstd{x}\hlopt{.}\hlstd{}\hlkwd{append}\hlstd{}\hlopt{(}\hlstd{}\hlnum{4}\hlstd{}\hlopt{)}\hspace*{\fill}\\
-\hlstd{}\hlkwa{print}\hlstd{}\hlopt{(}\hlstd{}\hlnum{2}\hlstd{}\hlopt{+}\hlstd{}\hlnum{2}\hlstd{}\hlopt{)}\hspace*{\fill}\\
-\hlstd{}\hlkwa{print}\hlstd{}\hlopt{(}\hlstd{x}\hlopt{)}\hlstd{}\hspace*{\fill}
-\mbox{}
-\normalfont
-
-\begin{verbatim}
-## 4
-## [1, 2, 3, 4, 5, 4]
-\end{verbatim}
-\end{kframe}
-\end{knitrout}
-\end{itemize}
-\end{frame}
-
 \section{Intro}
 
 \begin{frame}
 \frametitle{Plan}
 \begin{itemize}
-	\item We're going to focus on two things today
+	\item We're going to focus on two things 
 
 	\begin{enumerate}
 		\item Theoretical --- control statements and loops
@@ -169,7 +167,9 @@
 
 	\item Overview
 	\begin{enumerate}
-		\item Set up scripting tools
+		\item Get the packages we need
+
+		\item Set up editor 
 
 		\item A brief intro to loops
 
@@ -180,21 +180,75 @@
 \end{itemize}
 \end{frame}
 
+\section{Packages}
+
+\begin{frame}[fragile]
+\frametitle{Installing sounddevice}
+	\begin{itemize}
+		\item Why we need each of the following packages is explained later!
+
+		\item We should already have numpy, scipy, and matplotlib installed through Conda
+
+		\item However, we do need to install sounddevice, which will allow us to play sound from a numpy array
+
+		\item To do this using Conda, we type in a generic terminal window... 
+
+		conda list
+
+		\item We notice sounddevice is not on our list, so...
+
+		conda search sounddevice
+		
+		conda install sounddevice
+
+	\end{itemize}
+\end{frame}
+
 \section{Scripts}
 
 \begin{frame}
-\frametitle{Bare bones scripting}
+\frametitle{Editors}
 \begin{itemize}
-	\item Today, we'll set up a bare bones environment for scripts
-
-	\item You'll soon probably want something more fully fledged...
+	\item Today, we'll just be writing scripts in Notepad, saving them to disk, and then running them through the IPython terminal 
+	\item You'll soon probably want something more fully fledged, more like MATLAB or RStudio
 	\begin{enumerate}
 		\item Spyder
 
 		\item Eclipse
+
+		\item SublimeText
+
+		\item PyCharm
 	\end{enumerate}
 
-	\item Now, let's open up Notepad++
+	\item Now, let's open up Notepad... 
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Writing and running a script}
+\begin{itemize}
+	\item First we write a series of commands in Notepad
+
+	\item Note that Python is sensitive to indentation --- where MATLAB uses "end" and R brackets, Python uses indentation to indicate nested statements and such
+
+	\item Starting with something simple...
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\noindent
+\ttfamily
+\hlstd{}\hlkwa{print}\hlstd{}\hlopt{(}\hlstd{}\hlnum{2}\hlstd{}\hlopt{+}\hlstd{}\hlnum{2}\hlstd{}\hlopt{)}\hlstd{}\hspace*{\fill}
+\mbox{}
+\normalfont
+\end{kframe}
+\end{knitrout}
+
+	\item Save this using Notepad to a file called "test.py"
+
+	\item Then, in your terminal, say...
+	
+	python3 C:/your\_directory\_here/test.py
 \end{itemize}
 \end{frame}
 
@@ -230,7 +284,7 @@
 \begin{frame}[fragile]
 \frametitle{Loop syntax}
 \begin{itemize}
-	\item Unlike MATLAB and R which employ brackets, Python uses tabs to indicate nesting
+	\item As previously mentioned, Python uses indentation to indicate nesting
 
 	\item If we don't indent at least one line for a loop we'll have problems
 
@@ -257,7 +311,6 @@
 
 \end{frame}
 
-
 \begin{frame}[fragile]
 \frametitle{Looping over other things}
 \begin{itemize}
@@ -266,6 +319,8 @@
 	\item The range() function is for when we want integer sequences, but many things in Python can be used to create a loop (technically, these things are called iterables in Python-lingo)
 
 	\item Lists are iterables...
+
+	\item You can also define your own custom objects to be iterables!
 
 \end{itemize}
 \begin{knitrout}
@@ -326,28 +381,69 @@
 \noindent
 \ttfamily
 \hlstd{bases\ }\hlopt{=\ {[}}\hlstd{}\hlnum{1}\hlstd{}\hlopt{,\ }\hlstd{}\hlnum{2}\hlstd{}\hlopt{,\ }\hlstd{}\hlnum{3}\hlstd{}\hlopt{{]}}\hspace*{\fill}\\
+\hlstd{expos\ }\hlopt{=\ {[}}\hlstd{}\hlnum{1}\hlstd{}\hlopt{,\ }\hlstd{}\hlnum{2}\hlstd{}\hlopt{,\ }\hlstd{}\hlnum{3}\hlstd{}\hlopt{,\ }\hlstd{}\hlnum{4}\hlstd{}\hlopt{{]}}\hspace*{\fill}\\
 \hlstd{}\hlkwa{for\ }\hlstd{base\ }\hlkwa{in\ }\hlstd{bases}\hlopt{:}\hspace*{\fill}\\
-\hlstd{\ }\hlkwa{for\ }\hlstd{expo\ }\hlkwa{in\ }\hlstd{}\hlkwb{range}\hlstd{}\hlopt{(}\hlstd{}\hlnum{3}\hlstd{}\hlopt{):}\hspace*{\fill}\\
+\hlstd{\ }\hlkwa{print}\hlstd{}\hlopt{(}\hlstd{}\hlstr{"Base:"}\hlstd{\ }\hlopt{+\ }\hlstd{}\hlkwb{str}\hlstd{}\hlopt{(}\hlstd{base}\hlopt{))}\hspace*{\fill}\\
+\hlstd{\ }\hlkwa{for\ }\hlstd{expo\ }\hlkwa{in\ }\hlstd{expos}\hlopt{:}\hspace*{\fill}\\
 \hlstd{}\hlstd{\ \ }\hlstd{}\hlkwa{print}\hlstd{}\hlopt{(}\hlstd{}\hlkwb{str}\hlstd{}\hlopt{(}\hlstd{base}\hlopt{)\ +\ }\hlstd{}\hlstr{"\textasciicircum "}\hlstd{\ }\hlopt{+\ }\hlstd{}\hlkwb{str}\hlstd{}\hlopt{(}\hlstd{expo}\hlopt{)\ +\ }\hlstd{}\hlstr{"="}\hlstd{\ }\hlopt{+\ }\hlstd{}\hlkwb{str}\hlstd{}\hlopt{(}\hlstd{base}\hlopt{{*}{*}}\hlstd{expo}\hlopt{))}\hlstd{}\hspace*{\fill}
 \mbox{}
 \normalfont
 
 \begin{verbatim}
-## 1^0=1
+## Base:1
 ## 1^1=1
 ## 1^2=1
-## 2^0=1
+## 1^3=1
+## 1^4=1
+## Base:2
 ## 2^1=2
 ## 2^2=4
-## 3^0=1
+## 2^3=8
+## 2^4=16
+## Base:3
 ## 3^1=3
 ## 3^2=9
+## 3^3=27
+## 3^4=81
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
 \end{frame}
 
+\begin{frame}[fragile]
+\begin{itemize}
+	\item Naturally, we can mix loops and other control statements 
 
+\begin{knitrout}\tiny
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\noindent
+\ttfamily
+\hlstd{}\hlkwa{for\ }\hlstd{i\ }\hlkwa{in\ }\hlstd{}\hlkwb{range}\hlstd{}\hlopt{(}\hlstd{}\hlnum{10}\hlstd{}\hlopt{):}\hspace*{\fill}\\
+\hlstd{\ }\hlkwa{if\ }\hlstd{i\ }\hlopt{$<$\ }\hlstd{}\hlnum{3}\hlstd{}\hlopt{:}\hspace*{\fill}\\
+\hlstd{}\hlstd{\ \ }\hlstd{}\hlkwa{print}\hlstd{}\hlopt{(}\hlstd{i}\hlopt{)}\hspace*{\fill}\\
+\hlstd{\ }\hlkwa{elif\ }\hlstd{i\ }\hlopt{$>$\ }\hlstd{}\hlnum{3\ }\hlstd{}\hlkwa{and\ }\hlstd{i\ }\hlopt{$<$\ }\hlstd{}\hlnum{6}\hlstd{}\hlopt{:}\hspace*{\fill}\\
+\hlstd{}\hlstd{\ \ }\hlstd{}\hlkwa{print}\hlstd{}\hlopt{(}\hlstd{i}\hlopt{{*}}\hlstd{}\hlnum{100}\hlstd{}\hlopt{)}\hspace*{\fill}\\
+\hlstd{\ }\hlkwa{elif\ }\hlstd{i\ }\hlopt{==\ }\hlstd{}\hlnum{8}\hlstd{}\hlopt{:}\hspace*{\fill}\\
+\hlstd{}\hlstd{\ \ }\hlstd{}\hlkwa{break}\hspace*{\fill}\\
+\hlstd{\ }\hlkwa{else}\hlstd{}\hlopt{:}\hspace*{\fill}\\
+\hlstd{}\hlstd{\ \ }\hlstd{}\hlkwa{print}\hlstd{}\hlopt{(}\hlstd{}\hlstr{"Hello"}\hlstd{}\hlopt{)}\hlstd{}\hspace*{\fill}
+\mbox{}
+\normalfont
+
+\begin{verbatim}
+## 0
+## 1
+## 2
+## Hello
+## 400
+## 500
+## Hello
+## Hello
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\end{itemize}
+\end{frame}
 
 \section{Making a spectrogram}
 \begin{frame}[fragile]
@@ -359,7 +455,7 @@
 \noindent
 \ttfamily
 \hlstd{}\hspace*{\fill}\\
-\hlkwa{import\ }\hlstd{numpy}\hspace*{\fill}\\
+\hlkwa{import\ }\hlstd{numpy\ }\hlkwa{as\ }\hlstd{np}\hspace*{\fill}\\
 \hlkwa{from\ }\hlstd{scipy}\hlopt{.}\hlstd{io\ }\hlkwa{import\ }\hlstd{wavfile}\hspace*{\fill}\\
 \hlkwa{import\ }\hlstd{matplotlib}\hlopt{.}\hlstd{pyplot\ }\hlkwa{as\ }\hlstd{plt}\hspace*{\fill}\\
 \hlkwa{import\ }\hlstd{sounddevice\ }\hlkwa{as\ }\hlstd{sd}\hspace*{\fill}\\
@@ -371,11 +467,13 @@
 \end{itemize}
 
 \begin{itemize}
-	\item Numpy --- provides key matrix and DSP operations
+	\item numpy --- provides key matrix and DSP operations
 
 	\item wavfile --- provides read/write to wavfile
 	
 	\item pyplot --- user-friendly functions and objects for plotting
+
+	\item sounddevice --- playback from numpy arrays
 \end{itemize}
 \end{frame}
 
@@ -383,10 +481,15 @@
 \frametitle{Game Plan}
 \begin{enumerate}
 		\item Import one signal
+
 		\item Collect measurements of amplitude in each time frequency bin 
+
 		\item Plot it
+
 		\item Save the plot to file
+
 		\item Loop the above four steps as necessary
+
 		\item Put everything in a script
 \end{enumerate}
 \end{frame}
@@ -415,6 +518,7 @@
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \noindent
 \ttfamily
+\hlstd{y\ }\hlopt{=\ }\hlstd{y}\hlopt{/}\hlstd{np}\hlopt{.}\hlstd{}\hlkwb{max}\hlstd{}\hlopt{(}\hlstd{np}\hlopt{.}\hlstd{}\hlkwb{abs}\hlstd{}\hlopt{(}\hlstd{y}\hlopt{))}\hspace*{\fill}\\
 \hlstd{plt}\hlopt{.}\hlstd{}\hlkwd{plot}\hlstd{}\hlopt{(}\hlstd{y}\hlopt{)}\hlstd{}\hspace*{\fill}
 \mbox{}
 \normalfont
@@ -430,26 +534,9 @@
 \hlstd{sd}\hlopt{.}\hlstd{}\hlkwd{play}\hlstd{}\hlopt{(}\hlstd{y}\hlopt{,}\hlstd{fs}\hlopt{)}\hlstd{}\hspace*{\fill}
 \mbox{}
 \normalfont
-
-\begin{verbatim}
-## Segmentation fault
-\end{verbatim}
 \end{kframe}
 \end{knitrout}
 \end{itemize}
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{Importing some files}
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\noindent
-\ttfamily
-\hlstd{}\hlnum{2}\hlstd{}\hlopt{+}\hlstd{}\hlnum{2}\hlstd{}\hspace*{\fill}
-\mbox{}
-\normalfont
-\end{kframe}
-\end{knitrout}
 \end{frame}
 
 \end{document}

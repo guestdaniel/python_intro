@@ -1,10 +1,42 @@
-\frametitle{Importing some files}
+\frametitle{Importing a sound file}
+\begin{itemize}
+	\item The following pertains specifically to certain types of .wav files
+	\item For other file types or unusual .wavs, you may need to do some research!
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \noindent
 \ttfamily
-\hlstd{}\hlnum{2}\hlstd{}\hlopt{+}\hlstd{}\hlnum{2}\hlstd{}\hspace*{\fill}
+\hlstd{location\ }\hlopt{=\ }\hlstd{}\hlstr{"/home/daniel/Desktop/samples/m03ae.wav"}\hlstd{}\hspace*{\fill}\\
+\hlopt{{[}}\hlstd{fs}\hlopt{,\ }\hlstd{y}\hlopt{{]}\ =\ }\hlstd{wavfile}\hlopt{.}\hlstd{}\hlkwd{read}\hlstd{}\hlopt{(}\hlstd{location}\hlopt{)}\hlstd{}\hspace*{\fill}
 \mbox{}
 \normalfont
 \end{kframe}
 \end{knitrout}
+
+	\item This will place the sampled waveform contained in m03ae.wav with sample rate fs into the numpy vector y
+
+	\item We can see what this waveform looks like with ...
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\noindent
+\ttfamily
+\hlstd{y\ }\hlopt{=\ }\hlstd{y}\hlopt{/}\hlstd{np}\hlopt{.}\hlstd{}\hlkwb{max}\hlstd{}\hlopt{(}\hlstd{np}\hlopt{.}\hlstd{}\hlkwb{abs}\hlstd{}\hlopt{(}\hlstd{y}\hlopt{))}\hspace*{\fill}\\
+\hlstd{plt}\hlopt{.}\hlstd{}\hlkwd{plot}\hlstd{}\hlopt{(}\hlstd{y}\hlopt{)}\hlstd{}\hspace*{\fill}
+\mbox{}
+\normalfont
+\end{kframe}
+\end{knitrout}
+
+	\item And what it sounds like with...
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\noindent
+\ttfamily
+\hlstd{sd}\hlopt{.}\hlstd{}\hlkwd{play}\hlstd{}\hlopt{(}\hlstd{y}\hlopt{,}\hlstd{fs}\hlopt{)}\hlstd{}\hspace*{\fill}
+\mbox{}
+\normalfont
+\end{kframe}
+\end{knitrout}
+\end{itemize}
