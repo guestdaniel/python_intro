@@ -342,6 +342,15 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmtt8.tfm
 OUTPUT 02_spectrograms.vrb
 INPUT 02_spectrograms.vrb
 INPUT 02_spectrograms.vrb
+OUTPUT 02_spectrograms.vrb
+INPUT 02_spectrograms.vrb
+INPUT 02_spectrograms.vrb
+OUTPUT 02_spectrograms.vrb
+INPUT 02_spectrograms.vrb
+INPUT 02_spectrograms.vrb
+OUTPUT 02_spectrograms.vrb
+INPUT 02_spectrograms.vrb
+INPUT 02_spectrograms.vrb
 OUTPUT 02_spectrograms.nav
 OUTPUT 02_spectrograms.toc
 OUTPUT 02_spectrograms.snm

@@ -1,23 +1,10 @@
-\frametitle{Setting up the environment}
-\begin{itemize}
-	\item First, we need to import the necessary modules
+\frametitle{Importing some files}
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \noindent
 \ttfamily
-\hlstd{}\hlkwa{import\ }\hlstd{numpy}\hspace*{\fill}\\
-\hlkwa{from\ }\hlstd{scipy}\hlopt{.}\hlstd{io\ }\hlkwa{import\ }\hlstd{wavfile}\hspace*{\fill}\\
-\hlkwa{import\ }\hlstd{matplotlib}\hlopt{.}\hlstd{pyplot\ }\hlkwa{as\ }\hlstd{plt}\hspace*{\fill}
+\hlstd{}\hlnum{2}\hlstd{}\hlopt{+}\hlstd{}\hlnum{2}\hlstd{}\hspace*{\fill}
 \mbox{}
 \normalfont
 \end{kframe}
 \end{knitrout}
-\end{itemize}
-
-\begin{itemize}
-	\item Numpy --- provides key matrix and DSP operations
-
-	\item wavfile --- provides read/write to wavfile
-
-	\item pyplot --- user-friendly functions and objects for plotting
-\end{itemize}

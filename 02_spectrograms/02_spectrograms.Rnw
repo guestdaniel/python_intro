@@ -1,7 +1,7 @@
 \documentclass{beamer}
 
 \title{Python Intro --- Part 2}
-\subtitle{Spectrograms}
+\subtitle{Loops, Spectrograms}
 \author{Daniel Guest}
 
 \begin{document}
@@ -17,7 +17,7 @@
 \begin{itemize}
 	\item This entire presentation is a KnitR demonstration, as well as a presentation on Python
 
-	\item Check out the .Rnw file to see the mixture of \LaTeX{} code and R code that is Sweaved together by KnitR to generate the output
+	\item Check out the .Rnw file to see the mixture of \LaTeX{} code and R code that is combined by KnitR to generate the output
 	
 	\item I'm using the \LaTeX{} beamer package to create this slideshow
 
@@ -204,9 +204,12 @@ for base in bases:
 \begin{itemize}
 	\item First, we need to import the necessary modules
 <<engine="python", engine.path="python3">>=
-import numpy
+
+import numpy as np
 from scipy.io import wavfile
 import matplotlib.pyplot as plt
+import sounddevice as sd
+
 @
 \end{itemize}
 
@@ -216,6 +219,77 @@ import matplotlib.pyplot as plt
 	\item wavfile --- provides read/write to wavfile
 	
 	\item pyplot --- user-friendly functions and objects for plotting
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Game Plan}
+\begin{enumerate}
+		\item Import one signal
+		\item Collect measurements of amplitude in each time frequency bin 
+		\item Plot it
+		\item Save the plot to file
+		\item Loop the above four steps as necessary
+		\item Put everything in a script
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Importing a sound file}
+\begin{itemize}
+	\item The following pertains specifically to certain types of .wav files
+	\item For other file types or unusual .wavs, you may need to do some research!
+<<engine="python", engine.path="python3", echo=5:6>>=
+import numpy as np
+from scipy.io import wavfile
+import matplotlib.pyplot as plt
+import sounddevice as sd
+location = "/home/daniel/Desktop/samples/m03ae.wav"
+[fs, y] = wavfile.read(location)
+@
+
+	\item This will place the sampled waveform contained in m03ae.wav with sample rate fs into the numpy vector y
+
+	\item We can see what this waveform looks like with ...
+
+<<engine="python", engine.path="python3", echo=7>>=
+import numpy as np
+from scipy.io import wavfile
+import matplotlib.pyplot as plt
+import sounddevice as sd
+location = "/home/daniel/Desktop/samples/m03ae.wav"
+[fs, y] = wavfile.read(location)
+y = y/np.max(np.abs(y))
+plt.plot(y)
+@
+
+	\item And what it sounds like with...
+
+<<engine="python", engine.path="python3", echo=7>>=
+import numpy as np
+from scipy.io import wavfile
+import matplotlib.pyplot as plt
+import sounddevice as sd
+location = "/home/daniel/Desktop/samples/m03ae.wav"
+[fs,y] = wavfile.read(location)
+sd.play(y,fs)
+@
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Gathering amplitude measurements}
+\begin{itemize}
+	\item First, let's look at measuring the amplitude spectra of the entire signal, then we'll investigate how to break it into overlapping chunks to generate the time-frequency bin matrix 
+<<engine="python", engine.path="python3", echo=7:8>>=
+import numpy
+from scipy.io import wav			
+import matplotlib.pyplot as plt
+import sounddevice as sd
+location = "/home/daniel/Desktop/samples/m03ae.wav"
+[fs,y] = wavfile.read(location)
+m = 20*np.log10(np.fft.rfft(y))
+@
 \end{itemize}
 \end{frame}
 

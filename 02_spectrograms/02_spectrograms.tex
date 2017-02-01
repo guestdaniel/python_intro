@@ -52,7 +52,7 @@
 \usepackage{alltt}
 
 \title{Python Intro --- Part 2}
-\subtitle{Spectrograms}
+\subtitle{Loops, Spectrograms}
 \author{Daniel Guest}
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \begin{document}
@@ -68,7 +68,7 @@
 \begin{itemize}
 	\item This entire presentation is a KnitR demonstration, as well as a presentation on Python
 
-	\item Check out the .Rnw file to see the mixture of \LaTeX{} code and R code that is Sweaved together by KnitR to generate the output
+	\item Check out the .Rnw file to see the mixture of \LaTeX{} code and R code that is combined by KnitR to generate the output
 	
 	\item I'm using the \LaTeX{} beamer package to create this slideshow
 
@@ -358,9 +358,12 @@
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \noindent
 \ttfamily
-\hlstd{}\hlkwa{import\ }\hlstd{numpy}\hspace*{\fill}\\
+\hlstd{}\hspace*{\fill}\\
+\hlkwa{import\ }\hlstd{numpy}\hspace*{\fill}\\
 \hlkwa{from\ }\hlstd{scipy}\hlopt{.}\hlstd{io\ }\hlkwa{import\ }\hlstd{wavfile}\hspace*{\fill}\\
-\hlkwa{import\ }\hlstd{matplotlib}\hlopt{.}\hlstd{pyplot\ }\hlkwa{as\ }\hlstd{plt}\hspace*{\fill}
+\hlkwa{import\ }\hlstd{matplotlib}\hlopt{.}\hlstd{pyplot\ }\hlkwa{as\ }\hlstd{plt}\hspace*{\fill}\\
+\hlkwa{import\ }\hlstd{sounddevice\ }\hlkwa{as\ }\hlstd{sd}\hspace*{\fill}\\
+\hspace*{\fill}
 \mbox{}
 \normalfont
 \end{kframe}
@@ -376,4 +379,78 @@
 \end{itemize}
 \end{frame}
 
+\begin{frame}[fragile]
+\frametitle{Game Plan}
+\begin{enumerate}
+		\item Import one signal
+		\item Collect measurements of amplitude in each time frequency bin 
+		\item Plot it
+		\item Save the plot to file
+		\item Loop the above four steps as necessary
+		\item Put everything in a script
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Importing a sound file}
+\begin{itemize}
+	\item The following pertains specifically to certain types of .wav files
+	\item For other file types or unusual .wavs, you may need to do some research!
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\noindent
+\ttfamily
+\hlstd{location\ }\hlopt{=\ }\hlstd{}\hlstr{"/home/daniel/Desktop/samples/m03ae.wav"}\hlstd{}\hspace*{\fill}\\
+\hlopt{{[}}\hlstd{fs}\hlopt{,\ }\hlstd{y}\hlopt{{]}\ =\ }\hlstd{wavfile}\hlopt{.}\hlstd{}\hlkwd{read}\hlstd{}\hlopt{(}\hlstd{location}\hlopt{)}\hlstd{}\hspace*{\fill}
+\mbox{}
+\normalfont
+\end{kframe}
+\end{knitrout}
+
+	\item This will place the sampled waveform contained in m03ae.wav with sample rate fs into the numpy vector y
+
+	\item We can see what this waveform looks like with ...
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\noindent
+\ttfamily
+\hlstd{plt}\hlopt{.}\hlstd{}\hlkwd{plot}\hlstd{}\hlopt{(}\hlstd{y}\hlopt{)}\hlstd{}\hspace*{\fill}
+\mbox{}
+\normalfont
+\end{kframe}
+\end{knitrout}
+
+	\item And what it sounds like with...
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\noindent
+\ttfamily
+\hlstd{sd}\hlopt{.}\hlstd{}\hlkwd{play}\hlstd{}\hlopt{(}\hlstd{y}\hlopt{,}\hlstd{fs}\hlopt{)}\hlstd{}\hspace*{\fill}
+\mbox{}
+\normalfont
+
+\begin{verbatim}
+## Segmentation fault
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Importing some files}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\noindent
+\ttfamily
+\hlstd{}\hlnum{2}\hlstd{}\hlopt{+}\hlstd{}\hlnum{2}\hlstd{}\hspace*{\fill}
+\mbox{}
+\normalfont
+\end{kframe}
+\end{knitrout}
+\end{frame}
+
 \end{document}
+
