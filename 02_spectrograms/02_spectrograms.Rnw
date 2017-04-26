@@ -114,15 +114,15 @@ ggplot(iris, aes(x=Sepal.Width, y=Petal.Length, color=Petal.Width, shape=Species
 
 		\item However, we do need to install sounddevice, which will allow us to play sound from a numpy array
 
-		\item To do this using Conda, we type in a generic terminal window... 
+		\item Unfortunately, Conda doesn't support installs of sounddevice, so we'll install it manually using pip
 
-		conda list
+		\item pip is a popular Python package manager
 
-		\item We notice sounddevice is not on our list, so...
+		\item To do so, we'll run the following command (in your terminal, \emph{not} in Python):
 
-		conda search sounddevice
-		
-		conda install sounddevice
+<<installsd, engine="sh", eval=FALSE>>=
+pip install sounddevice
+@
 
 	\end{itemize}
 \end{frame}
@@ -133,7 +133,7 @@ ggplot(iris, aes(x=Sepal.Width, y=Petal.Length, color=Petal.Width, shape=Species
 \frametitle{Editors}
 \begin{itemize}
 	\item Today, we'll just be writing scripts in Notepad, saving them to disk, and then running them through the IPython terminal 
-	\item You'll soon probably want something more fully fledged, more like MATLAB or RStudio
+	\item You'll soon probably want something more fully fledged, these are good options:
 	\begin{enumerate}
 		\item Spyder
 
@@ -144,14 +144,14 @@ ggplot(iris, aes(x=Sepal.Width, y=Petal.Length, color=Petal.Width, shape=Species
 		\item PyCharm
 	\end{enumerate}
 
-	\item Now, let's open up Notepad... 
+	\item Now, let's open up Notepad (or any similar program in Mac/Linux)... 
 \end{itemize}
 \end{frame}
 
-\begin{frame}
+\begin{frame}[fragile]
 \frametitle{Writing and running a script}
 \begin{itemize}
-	\item First we write a series of commands in Notepad
+	\item First we write some commands in Notepad 
 
 	\item Note that Python is sensitive to indentation --- where MATLAB uses "end" and R brackets, Python uses indentation to indicate nested statements and such
 
@@ -163,9 +163,18 @@ print(2+2)
 
 	\item Save this using Notepad to a file called "test.py"
 
-	\item Then, in your terminal, say...
-	
-	python3 C:/your\_directory\_here/test.py
+	\item Then, run the following line (for Windows)...
+
+<<runscript, engine="sh", eval=FALSE>>=
+python3 C:\\your_directory_here\\test.py
+@
+
+	\item Or this line (for Mac/Linux)...
+
+<<runscriptunix, engine="sh", eval=FALSE>>=
+python3 /your_directory_here/test.py
+@
+
 \end{itemize}
 \end{frame}
 
@@ -267,10 +276,30 @@ for i in range(10):
 \end{frame}
 
 \section{Making a spectrogram}
+
+\begin{frame}[fragile]
+\frametitle{Game Plan}
+\begin{enumerate}
+		\item Import one signal
+
+		\item Collect measurements of amplitude in each time frequency bin 
+
+		\item Plot it
+
+		\item Save the plot to file
+
+		\item Loop the above four steps as necessary
+
+		\item Put everything in a script
+\end{enumerate}
+\end{frame}
+
 \begin{frame}[fragile]
 \frametitle{Setting up the environment}
 \begin{itemize}
-	\item First, we need to import the necessary modules
+	\item First, launch your Python terminal
+
+	\item Then, we need to import the necessary modules
 <<engine="python", engine.path="python3">>=
 
 import numpy as np
@@ -293,28 +322,10 @@ import sounddevice as sd
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{Game Plan}
-\begin{enumerate}
-		\item Import one signal
-
-		\item Collect measurements of amplitude in each time frequency bin 
-
-		\item Plot it
-
-		\item Save the plot to file
-
-		\item Loop the above four steps as necessary
-
-		\item Put everything in a script
-\end{enumerate}
-\end{frame}
-
-\begin{frame}[fragile]
 \frametitle{Importing a sound file}
 \begin{itemize}
-	\item The following pertains specifically to certain types of .wav files
-	\item For other file types or unusual .wavs, you may need to do some research!
-<<engine="python", engine.path="python3", echo=5:6>>=
+	\item Run the following lines (may need to tweak the location to match where your file is located!)...
+<<engine="python", engine.path="python3", echo=5:6, eval=FALSE>>=
 import numpy as np
 from scipy.io import wavfile
 import matplotlib.pyplot as plt
@@ -327,7 +338,7 @@ location = "/home/daniel/Desktop/samples/m03ae.wav"
 
 	\item We can see what this waveform looks like with ...
 
-<<engine="python", engine.path="python3", echo=7:8>>=
+<<engine="python", engine.path="python3", echo=7:8, eval=FALSE>>=
 import numpy as np
 from scipy.io import wavfile
 import matplotlib.pyplot as plt
@@ -340,7 +351,7 @@ plt.plot(y)
 
 	\item And what it sounds like with...
 
-<<engine="python", engine.path="python3", echo=7, results="hide">>=
+<<engine="python", engine.path="python3", echo=7, results="hide", eval=FALSE>>=
 import numpy as np
 from scipy.io import wavfile
 import matplotlib.pyplot as plt

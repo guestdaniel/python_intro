@@ -191,15 +191,21 @@ A nice demonstration of KnitR!
 
 		\item However, we do need to install sounddevice, which will allow us to play sound from a numpy array
 
-		\item To do this using Conda, we type in a generic terminal window... 
+		\item Unfortunately, Conda doesn't support installs of sounddevice, so we'll install it manually using pip
 
-		conda list
+		\item pip is a popular Python package manager
 
-		\item We notice sounddevice is not on our list, so...
+		\item To do so, we'll run the following command (in your terminal, \emph{not} in Python):
 
-		conda search sounddevice
-		
-		conda install sounddevice
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\noindent
+\ttfamily
+\hlstd{pip\ }\hlkwc{install\ }\hlstd{sounddevice}\hspace*{\fill}
+\mbox{}
+\normalfont
+\end{kframe}
+\end{knitrout}
 
 	\end{itemize}
 \end{frame}
@@ -210,7 +216,7 @@ A nice demonstration of KnitR!
 \frametitle{Editors}
 \begin{itemize}
 	\item Today, we'll just be writing scripts in Notepad, saving them to disk, and then running them through the IPython terminal 
-	\item You'll soon probably want something more fully fledged, more like MATLAB or RStudio
+	\item You'll soon probably want something more fully fledged, these are good options:
 	\begin{enumerate}
 		\item Spyder
 
@@ -221,14 +227,14 @@ A nice demonstration of KnitR!
 		\item PyCharm
 	\end{enumerate}
 
-	\item Now, let's open up Notepad... 
+	\item Now, let's open up Notepad (or any similar program in Mac/Linux)... 
 \end{itemize}
 \end{frame}
 
-\begin{frame}
+\begin{frame}[fragile]
 \frametitle{Writing and running a script}
 \begin{itemize}
-	\item First we write a series of commands in Notepad
+	\item First we write some commands in Notepad 
 
 	\item Note that Python is sensitive to indentation --- where MATLAB uses "end" and R brackets, Python uses indentation to indicate nested statements and such
 
@@ -246,9 +252,30 @@ A nice demonstration of KnitR!
 
 	\item Save this using Notepad to a file called "test.py"
 
-	\item Then, in your terminal, say...
-	
-	python3 C:/your\_directory\_here/test.py
+	\item Then, run the following line (for Windows)...
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\noindent
+\ttfamily
+\hlstd{python3\ C}\hlopt{:}\hlstd{}\hlesc{$\backslash$$\backslash$}\hlstd{your\textunderscore directory\textunderscore here}\hlesc{$\backslash$$\backslash$}\hlstd{}\hlkwb{test}\hlstd{.py}\hspace*{\fill}
+\mbox{}
+\normalfont
+\end{kframe}
+\end{knitrout}
+
+	\item Or this line (for Mac/Linux)...
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\noindent
+\ttfamily
+\hlstd{python3\ }\hlopt{/}\hlstd{your\textunderscore directory\textunderscore here}\hlopt{/}\hlstd{}\hlkwb{test}\hlstd{.py}\hspace*{\fill}
+\mbox{}
+\normalfont
+\end{kframe}
+\end{knitrout}
+
 \end{itemize}
 \end{frame}
 
@@ -446,10 +473,30 @@ A nice demonstration of KnitR!
 \end{frame}
 
 \section{Making a spectrogram}
+
+\begin{frame}[fragile]
+\frametitle{Game Plan}
+\begin{enumerate}
+		\item Import one signal
+
+		\item Collect measurements of amplitude in each time frequency bin 
+
+		\item Plot it
+
+		\item Save the plot to file
+
+		\item Loop the above four steps as necessary
+
+		\item Put everything in a script
+\end{enumerate}
+\end{frame}
+
 \begin{frame}[fragile]
 \frametitle{Setting up the environment}
 \begin{itemize}
-	\item First, we need to import the necessary modules
+	\item First, launch your Python terminal
+
+	\item Then, we need to import the necessary modules
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \noindent
@@ -478,27 +525,9 @@ A nice demonstration of KnitR!
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{Game Plan}
-\begin{enumerate}
-		\item Import one signal
-
-		\item Collect measurements of amplitude in each time frequency bin 
-
-		\item Plot it
-
-		\item Save the plot to file
-
-		\item Loop the above four steps as necessary
-
-		\item Put everything in a script
-\end{enumerate}
-\end{frame}
-
-\begin{frame}[fragile]
 \frametitle{Importing a sound file}
 \begin{itemize}
-	\item The following pertains specifically to certain types of .wav files
-	\item For other file types or unusual .wavs, you may need to do some research!
+	\item Run the following lines (may need to tweak the location to match where your file is located!)...
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \noindent

@@ -1,7 +1,6 @@
 \frametitle{Importing a sound file}
 \begin{itemize}
-	\item The following pertains specifically to certain types of .wav files
-	\item For other file types or unusual .wavs, you may need to do some research!
+	\item Run the following lines (may need to tweak the location to match where your file is located!)...
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \noindent
