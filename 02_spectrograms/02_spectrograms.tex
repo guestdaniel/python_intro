@@ -118,7 +118,7 @@ A nice demonstration of KnitR!
 \hlkwd{head}\hlstd{(iris} \hlopt{%>%} \hlkwd{group_by}\hlstd{(Species)} \hlopt{%>%} \hlkwd{summarize}\hlstd{(}\hlkwc{wid.mean} \hlstd{=} \hlkwd{mean}\hlstd{(Sepal.Width),} \hlkwc{wid.sd} \hlstd{=} \hlkwd{sd}\hlstd{(Sepal.Width)))}
 \end{alltt}
 \begin{verbatim}
-## # A tibble: 3 × 3
+## # A tibble: 3 x 3
 ##      Species wid.mean    wid.sd
 ##       <fctr>    <dbl>     <dbl>
 ## 1     setosa    3.428 0.3790644
@@ -131,7 +131,6 @@ A nice demonstration of KnitR!
 
 \begin{frame}[fragile]
 \frametitle{First, a small aside...}
-
 \begin{knitrout}\tiny
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
@@ -215,7 +214,7 @@ A nice demonstration of KnitR!
 \begin{frame}
 \frametitle{Editors}
 \begin{itemize}
-	\item Today, we'll just be writing scripts in Notepad, saving them to disk, and then running them through the IPython terminal 
+	\item Today, we'll just be writing scripts in a text editor, saving them to disk, and then running them through the IPython terminal 
 	\item You'll soon probably want something more fully fledged, these are good options:
 	\begin{enumerate}
 		\item Spyder
@@ -236,7 +235,7 @@ A nice demonstration of KnitR!
 \begin{itemize}
 	\item First we write some commands in Notepad 
 
-	\item Note that Python is sensitive to indentation --- where MATLAB uses "end" and R brackets, Python uses indentation to indicate nested statements and such
+	\item Note that Python is sensitive to indentation --- where MATLAB uses "end" and R brackets, Python uses indentation to indicate nested statements
 
 	\item Starting with something simple...
 
@@ -509,6 +508,20 @@ A nice demonstration of KnitR!
 \hspace*{\fill}
 \mbox{}
 \normalfont
+
+\begin{verbatim}
+## Traceback (most recent call last):
+##   File "<string>", line 5, in <module>
+##   File "/usr/local/lib/python3.5/site-packages/sounddevice.py", line 343, in <module>
+##     _lib = _ffi.dlopen('portaudio')
+##   File "/usr/local/lib/python3.5/site-packages/cffi/api.py", line 140, in dlopen
+##     lib, function_cache = _make_ffi_library(self, name, flags)
+##   File "/usr/local/lib/python3.5/site-packages/cffi/api.py", line 786, in _make_ffi_library
+##     backendlib = _load_backend_lib(backend, libname, flags)
+##   File "/usr/local/lib/python3.5/site-packages/cffi/api.py", line 781, in _load_backend_lib
+##     raise OSError(msg)
+## OSError: ctypes.util.find_library() did not manage to locate a library called 'portaudio'
+\end{verbatim}
 \end{kframe}
 \end{knitrout}
 \end{itemize}

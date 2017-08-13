@@ -1,6 +1,6 @@
 \frametitle{Importing a sound file}
 \begin{itemize}
-	\item Run the following lines (may need to tweak the location to match where your file is located!)...
+\item Run the following lines (may need to tweak the location to match where your file is located!)...
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \noindent
@@ -12,9 +12,9 @@
 \end{kframe}
 \end{knitrout}
 
-	\item This will place the sampled waveform contained in m03ae.wav with sample rate fs into the numpy vector y
+\item This will place the sampled waveform contained in m03ae.wav with sample rate fs into the numpy vector y
 
-	\item We can see what this waveform looks like with ...
+\item We can see what this waveform looks like with ...
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
@@ -27,7 +27,7 @@
 \end{kframe}
 \end{knitrout}
 
-	\item And what it sounds like with...
+\item And what it sounds like with...
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}

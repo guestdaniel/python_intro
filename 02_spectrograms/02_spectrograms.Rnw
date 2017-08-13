@@ -60,7 +60,6 @@ head(iris %>% group_by(Species) %>% summarize(wid.mean = mean(Sepal.Width), wid.
 
 \begin{frame}[fragile]
 \frametitle{First, a small aside...}
-
 <<fig.width=8, fig.height=4, size="tiny">>=
 ggplot(iris, aes(x=Sepal.Width, y=Petal.Length, color=Petal.Width, shape=Species)) + geom_point()
 @
@@ -132,7 +131,7 @@ pip install sounddevice
 \begin{frame}
 \frametitle{Editors}
 \begin{itemize}
-	\item Today, we'll just be writing scripts in Notepad, saving them to disk, and then running them through the IPython terminal 
+	\item Today, we'll just be writing scripts in a text editor, saving them to disk, and then running them through the IPython terminal 
 	\item You'll soon probably want something more fully fledged, these are good options:
 	\begin{enumerate}
 		\item Spyder
@@ -153,7 +152,7 @@ pip install sounddevice
 \begin{itemize}
 	\item First we write some commands in Notepad 
 
-	\item Note that Python is sensitive to indentation --- where MATLAB uses "end" and R brackets, Python uses indentation to indicate nested statements and such
+	\item Note that Python is sensitive to indentation --- where MATLAB uses "end" and R brackets, Python uses indentation to indicate nested statements
 
 	\item Starting with something simple...
 

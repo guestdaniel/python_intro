@@ -1,4 +1,4 @@
-\beamer@endinputifotherversion {3.36pt}
+\beamer@endinputifotherversion {3.24pt}
 \beamer@sectionintoc {1}{KnitR}{2}{0}{1}
 \beamer@sectionintoc {2}{Intro}{7}{0}{2}
 \beamer@sectionintoc {3}{Packages}{9}{0}{3}
